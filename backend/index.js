@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
-const mysql = require("mysql");
+// const mysql = require("mysql");
+const controllers = require("./controllers/mobileController");
 
 // environment variables access
 require("dotenv").config();
@@ -15,35 +16,10 @@ app.use(cors());
 // morgan
 
 //database connection
-const db = mysql.createConnection({
-  host: "localhost",
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: "price_comparison",
-});
-
-// check connection
-db.connect((err) => {
-  if (err) {
-    return console.error("error : ", err.message);
-  }
-
-  console.log("Database is connected");
-});
 
 // routes
-app.get("/", (req, res) => {
-  db.query("SELECT * FROM websites_table;", (err, result) => {
-    if (err) {
-      console.error("error : ", err);
-      res.json(err);
-    } else {
-      console.log("Result : ", result);
-      res.json(result);
-    }
-  });
-  // res.send("Hello world!!!...");
-});
+app.get("/", controllers.getAllMobile);
+app.get("/:name", controllers.searchMobiles);
 
 //server listen
 app.listen(process.env.PORT, () => {
