@@ -19,7 +19,7 @@ app.use(cors());
 
 // routes
 app.get("/", controllers.getAllMobile);
-app.get("/:name", controllers.searchMobiles);
+app.get("/model=:model", controllers.searchMobiles);
 
 //server listen
 app.listen(process.env.PORT, () => {

@@ -1,11 +1,33 @@
 var cards = document.getElementById("cards");
 var input = document.getElementById("inputValue");
 
-const getValue = () => {
+const getValue = async () => {
   console.log(input.value);
+  const url = `http://localhost:8000/model=${input.value}`;
+
+  const data = await fetch(url)
+    .then((res) => res.json())
+    .then((payload) => {
+      console.log(payload);
+      return payload;
+    })
+    .catch((err) => console.log(err));
+
+  console.log("Data : ", data);
 };
 
-const getData = () => {
+const getData = async () => {
+  const url = "http://localhost:8000/";
+
+  const data = await fetch(url)
+    .then((res) => res.json())
+    .then((payload) => {
+      console.log(payload);
+      return payload;
+    })
+    .catch((err) => console.log(err));
+
+  console.log("Data : ", data);
   cards.innerHTML = `<div class="col">
           <div class="card h-100">
             <img
