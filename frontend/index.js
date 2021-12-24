@@ -2,97 +2,67 @@ var cards = document.getElementById("cards");
 var input = document.getElementById("inputValue");
 
 const getValue = async () => {
-  console.log(input.value);
-  const url = `http://localhost:8000/model=${input.value}`;
+  const url = `http://localhost:8000/api/price_comparison/model=${input.value}`;
 
   const data = await fetch(url)
     .then((res) => res.json())
     .then((payload) => {
-      console.log(payload);
       return payload;
     })
     .catch((err) => console.log(err));
 
-  console.log("Data : ", data);
+  const { payload } = data;
+
+  cards.innerHTML = payload.map((pay, index) => {
+    return `<div class="col">
+          <div class="card h-100">
+            <img
+              src=${pay.mobile_image}
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">${pay.mobile_model}</h5>
+              <p class="card-text">
+                ${pay.mobile_price}
+              </p>
+              <a href=${pay.site_url}>For further click here</a>
+            </div>
+          </div>
+        </div>`;
+  });
 };
 
 const getData = async () => {
-  const url = "http://localhost:8000/";
+  const url = "http://localhost:8000/api/price_comparison";
 
   const data = await fetch(url)
     .then((res) => res.json())
     .then((payload) => {
-      console.log(payload);
       return payload;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.error(err));
 
-  console.log("Data : ", data);
-  cards.innerHTML = `<div class="col">
+  const { payload } = data;
+
+  cards.innerHTML = payload.map((pay, index) => {
+    return `<div class="col">
           <div class="card h-100">
             <img
-              src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/en/mkt/plp/new-phones/product-list/p40-pro-plus-black.png"
+              src=${pay.mobile_image}
               class="card-img-top"
               alt="..."
             />
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
+              <h5 class="card-title">${pay.mobile_model}</h5>
               <p class="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
+                ${pay.mobile_price}
               </p>
-              <a href='https://www.google.com'>For further click here</a>
+              <a href=${pay.site_url}>For further click here</a>
             </div>
           </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <img
-              src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/en/mkt/plp/new-phones/product-list/p40-pro-plus-black.png"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a short card.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <img
-              src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/en/mkt/plp/new-phones/product-list/p40-pro-plus-black.png"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <img
-              src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/en/mkt/plp/new-phones/product-list/p40-pro-plus-black.png"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-            </div>
-          </div>
-        </div>
-              `;
+        </div>`;
+  });
 };
 
 getData();
@@ -101,11 +71,10 @@ const galleryItems = document.querySelector("#cards").children;
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
 const page = document.querySelector(".page-num");
-const maxItem = 2;
+const maxItem = 5;
 let index = 1;
 
-const pagination = Math.ceil(galleryItems.length / maxItem);
-console.log("pagination : ", pagination);
+const pagination = Math.ceil(25 / maxItem);
 
 prev.addEventListener("click", function () {
   index--;
@@ -133,13 +102,11 @@ function check() {
 }
 
 function showItems() {
-  for (let i = 0; i < galleryItems.length; i++) {
+  for (let i = 0; i < 25; i++) {
     galleryItems[i].classList.remove("show");
     galleryItems[i].classList.add("hide");
 
     if (i >= index * maxItem - maxItem && i < index * maxItem) {
-      // if i greater than and equal to (index*maxItem)-maxItem;
-      // means  (1*8)-8=0 if index=2 then (2*8)-8=8
       galleryItems[i].classList.remove("hide");
       galleryItems[i].classList.add("show");
     }

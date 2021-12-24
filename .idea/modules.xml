@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/scrapping/ScrapingJava.iml" filepath="$PROJECT_DIR$/scrapping/ScrapingJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaprojecg2/javaprojecg.iml" filepath="$PROJECT_DIR$/javaprojecg2/javaprojecg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/price_comperison.iml" filepath="$PROJECT_DIR$/.idea/price_comperison.iml" />
+    </modules>
+  </component>
+</project>

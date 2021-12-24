@@ -18,8 +18,8 @@ app.use(cors());
 //database connection
 
 // routes
-app.get("/", controllers.getAllMobile);
-app.get("/model=:model", controllers.searchMobiles);
+app.get("/api/price_comparison", controllers.getAllMobile);
+app.get("/api/price_comparison/model=:model", controllers.searchMobiles);
 
 //server listen
 app.listen(process.env.PORT, () => {
