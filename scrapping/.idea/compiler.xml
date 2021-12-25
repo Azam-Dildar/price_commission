@@ -6,8 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="javaprojecg" />
-        <module name="javaprojecg2" />
+        <module name="scrapping" />
       </profile>
     </annotationProcessing>
   </component>

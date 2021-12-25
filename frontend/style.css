@@ -57,3 +57,7 @@
   color: gray;
   pointer-events: none;
 }
+
+.imageSize {
+  height: 60%;
+}
